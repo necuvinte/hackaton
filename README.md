@@ -1,5 +1,4 @@
 YOU MUST HAVE NODEJS AND NPM INSTALLED TO RUN THIS PROECT
-CD to project source
 
-to run the server type in the source of the project:
+to run the server cd to project source:
  npm start
