@@ -39,7 +39,7 @@ function alertContents() {
         if (httpRequest.status === 200) {
             console.log(JSON.parse(httpRequest.responseText).results[0].geometry.location);
         } else {
-            alert('There was a problem with the request.');
+            alert('Va rugam sa alegeti o adresa valida');
         }
     }
 
