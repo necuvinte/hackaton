@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1 Index
+    button(id="currentLocation") Locatia mea
+    input(type="text" id="address" placeholder="Introduceti adresa")
+    button(id="findLocation") Cautare
+
+    script(src="/js/geolocation.js")
