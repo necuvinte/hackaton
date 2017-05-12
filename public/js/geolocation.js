@@ -9,6 +9,11 @@ function getGeolocation(){
                 lng: position.coords.longitude
             });
 
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", 'http://localhost:5000/location', true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            xhr.send(latitudine = position.coords.latitude);
+
         }, function() {
            console.log('Error!');
         });
@@ -22,7 +27,7 @@ function findAddress(){
     var address = document.getElementById("address").value.split(' ').join('+');
     var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyBMN28F6Ef-4HFF_E4yzZDHXfBUDDGehCQ";
 
-    httpRequest = new XMLHttpRequest();
+     httpRequest = new XMLHttpRequest();
 
     if (!httpRequest) {
         alert('Giving up :( Cannot create an XMLHTTP instance');
