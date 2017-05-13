@@ -1,43 +1,55 @@
 let Contact = require('../models/contact');
 const distance = require('google-distance');
+distance.apiKey = 'AIzaSyAfttVIWtw09qGs7Wn-dSco4RPCmsFvca4';
 
-module.exports = (req, res) => {
+module.exports.returnLocations = (req, res) => {
 
-    console.log(req);
     Contact.getAllContacts(function(err,contacts){
         if(err) throw err;
 
-        contacts.map(contact => {
-            let distanta = Math.sqrt((req.query.latitudine - contact.latitudine)**2 * 10**8 + (req.query.longitudine - contact.longitudine)**2 * 10**8)/ 10000;
-            contact.distanta = distanta.toFixed(2);
-        });
+        let contacteValide = contacts.filter( contact => contact.ADRESA != '');
 
-        contacts.sort((a,b) => a.distanta - b.distanta);
+        let adrese = contacteValide.map( contact => contact.ADRESA);
 
-        if(contacts.length > 10){
-            contacts = contacts.slice(0,10);
-        }
+        //console.log(adrese);
 
-        let adrese = contacts.map(contact => contact.latitudine + ',' + contact.longitudine);
+        //TODO remember to validate adresses on the admin interface
+
+        //TODO keep the commented code, test for location errors
+        //Strada Ady Endre 5, Târgu Secuiesc 525400 - Târgu Secuiesc, Str. Curtea 11, nr. 4, jud. Covasna
+        //adresa gasita pe google/ adresa trecuta
+
+        // adrese.forEach(adresa => {
+        //     distance.get({
+        //         origin: 'B-dul 1848, nr. 23, Hunedoara',
+        //         destination: adresa
+        //     }, function (err, data) {
+        //         if(err) {
+        //             console.log(adresa);
+        //         }
+        //
+        //     })
+        // });
 
         distance.get(
             {
+                //origin: 'B-dul 1848, nr. 23, Hunedoara',
                 origin: req.query.latitudine + ',' + req.query.longitudine,
                 destinations: adrese
             },
             function(err, data) {
                 if (err) return console.log(err);
-                console.log(data);
-                contacts.forEach(function(contact, index, contacts){
+                //console.log(data);
+                contacteValide.forEach(function(contact, index, contacts){
                     contact.distanta = data[index].distance;
                     contact.durata = data[index].durationValue;
-                    contacts[index] = contact;
+                    contacteValide[index] = contact;
 
                 });
-                contacts.sort((a,b) => parseInt(a.durata) - parseInt(b.durata));
-                contacts.forEach(contact => console.log(contact.durata));
-                console.log(contacts);
-                res.render('results', {contacts: contacts});
+                contacteValide.sort((a,b) => parseInt(a.durata) - parseInt(b.durata));
+                contacteValide.forEach(contact => console.log(contact.durata));
+                //console.log(contacteValide);
+                res.render('results', {contacts: contacteValide});
             });
     });
 
@@ -46,3 +58,9 @@ module.exports = (req, res) => {
 
 };
 
+module.exports.returnInvalidLocations = function(req, res){
+    Contact.getAllContacts(function (err, contacts) {
+        let adreseInvalide = contacts.filter( contact => contact.ADRESA === '');
+        res.send(adreseInvalide);
+    })
+};

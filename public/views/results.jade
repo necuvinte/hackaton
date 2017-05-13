@@ -3,4 +3,15 @@ extends layout
 block content
     if contacts
         each contact, i in contacts
-            div #{contact}
+            div
+            ul.list-group
+                if contact.JUDET
+                    li.list.group-item #{contact.JUDET}
+                if contact.TELEFON
+                    li.list.group-item #{contact.TELEFON}
+                if contact.E-MAIL
+                    li.list.group-item #{contact.E-MAIL}
+                if contact.ADRESA
+                    li.list.group-item #{contact.ADRESA}
+                if contact.SERVICII
+                    li.list.group-item #{contact.SERVICII}

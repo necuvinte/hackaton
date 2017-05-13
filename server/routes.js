@@ -5,11 +5,13 @@ const userController = require('./controllers/UserController');
 
 module.exports = function(app, public, passport) {
 
-    app.post('/location', mapController);
+    app.post('/location', mapController.returnLocations);
 
     app.post("/login", passport.authenticate('local-login'), function(req, res) {
         res.json(req.user);
     });
+
+    app.get('/invalid', mapController.returnInvalidLocations);
 
     // handle logout
     app.post("/logout", userController.logout);
