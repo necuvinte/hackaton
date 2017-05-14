@@ -6,7 +6,8 @@
     "font-awesome": "latest",
     "angular": "latest",
     "angular-route": "latest",
-    "angular-ui-grid": "latest"
+    "angular-ui-grid": "latest",
+    "axios": "^0.16.1"
   },
   "resolutions": {
     "angular": "1.6.4"

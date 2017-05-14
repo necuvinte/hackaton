@@ -34,7 +34,7 @@ module.exports.returnLocations = (req, res) => {
         distance.get(
             {
                 //origin: 'B-dul 1848, nr. 23, Hunedoara',
-                origin: req.query.latitudine + ',' + req.query.longitudine,
+                origin: req.body.latitudine + ',' + req.body.longitudine,
                 destinations: adrese
             },
             function(err, data) {
@@ -49,7 +49,7 @@ module.exports.returnLocations = (req, res) => {
                 contacteValide.sort((a,b) => parseInt(a.durata) - parseInt(b.durata));
                 contacteValide.forEach(contact => console.log(contact.durata));
                 //console.log(contacteValide);
-                res.render('results', {contacts: contacteValide});
+                res.send(contacteValide);
             });
     });
 
