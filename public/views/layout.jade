@@ -1,8 +1,40 @@
 doctype html
-html(lang="en")
+html
     head
-        title Necuvinte
-        link(rel="stylesheet", href="bower_components/bootstrap/dist/css/bootstrap.css")
-        link(rel="stylesheet", href="css/customer.css")
+        link(href='https://fonts.googleapis.com/css?family=Cabin', rel='stylesheet', type='text/css')
+        link(href='css/customer.css', rel='stylesheet', type='text/css')
     body
-        block content
+        .container
+            .header
+                img(src='images/logo.png')
+            .content
+                h2.red-text Alege una din opţiunile de mai jos pentru a găsi cea mai apropiată locaţie:
+                .boxleft
+                    .circle
+                        | 1
+                    form(action='#')
+                        button.submit#currentLocation(type='submit') Caută după adresa mea
+                .boxright
+                    .circle
+                        | 2
+                    div#cat-photo-form
+                        input.cls_input#address(type='text', size='30', placeholder='introduceti adresa', required='')
+                        button.submit#findLocation Căutare
+            .loadingbox#loading(style='display:none;')
+                .windows8
+                    #wBall_1.wBall
+                        .wInnerBall
+                    #wBall_2.wBall
+                        .wInnerBall
+                    #wBall_3.wBall
+                        .wInnerBall
+                    #wBall_4.wBall
+                        .wInnerBall
+                    #wBall_5.wBall
+                        .wInnerBall
+            .content
+                h2.red-text Rezultate
+                block content
+
+
+        script(src="/js/geolocation.js")

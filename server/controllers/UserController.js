@@ -18,7 +18,7 @@ module.exports.signUp = function(req, res) {
             res.json(null);
             return;
         } else {
-            var newUser = new User();
+            let newUser = new User();
             newUser.username = req.body.username.toLowerCase();
             newUser.password = newUser.generateHash(req.body.password);
             newUser.save(function(err, user) {

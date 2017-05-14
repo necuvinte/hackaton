@@ -7,6 +7,8 @@ module.exports = function(app, public, passport) {
 
     app.post('/location', mapController.returnLocations);
 
+
+    //ADMIN ROUTES
     app.post("/login", passport.authenticate('local-login'), function(req, res) {
         res.json(req.user);
     });
@@ -24,6 +26,7 @@ module.exports = function(app, public, passport) {
 
     app.post('/admin/create', contactController.createContact);
 
+    //LANDING ROUTES
     app.get('/', (req, res) => {
         res.render("index");
     });

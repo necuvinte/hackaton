@@ -4,14 +4,14 @@ block content
     if contacts
         each contact, i in contacts
             div
-            ul.list-group
+            ul.red-text
                 if contact.JUDET
-                    li.list.group-item #{contact.JUDET}
+                    li.red-texte #{contact.JUDET}
                 if contact.TELEFON
-                    li.list.group-item #{contact.TELEFON}
+                    li #{contact.TELEFON}
                 if contact.E-MAIL
-                    li.list.group-item #{contact.E-MAIL}
+                    li #{contact.E-MAIL}
                 if contact.ADRESA
-                    li.list.group-item #{contact.ADRESA}
+                    li #{contact.ADRESA}
                 if contact.SERVICII
-                    li.list.group-item #{contact.SERVICII}
+                    li #{contact.SERVICII}
