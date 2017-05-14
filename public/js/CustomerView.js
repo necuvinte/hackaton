@@ -110,7 +110,17 @@ document.onload = function() {
             });
         } else {
             // Browser doesn't support Geolocation
-            console.log("Not supported");
+            load();
+            axios.get('https://ipinfo.io/geo').then(function (response) {
+                var loc = response.loc.split(',');
+                axios.post('location', {
+                    latitudine: loc[0],
+                    longitude: loc[1]
+                }).then(function(response){
+                    mapResponse(results, response.data);
+                });
+            })
+
         }
     }
 
