@@ -543,6 +543,10 @@ p {
     padding: 5px;
 }
 
+.center-text{
+    text-align: center;
+}
+
 @media only screen and (max-width: 959px) and (min-width: 768px){
     .container{
         width: 748px;
