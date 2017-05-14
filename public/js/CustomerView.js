@@ -106,21 +106,20 @@ document.onload = function() {
 
 
             }, function () {
-                alert('Ceva nu a mers cum trebuie, va rugam reincercati');
+                load();
+                axios.get('https://ipinfo.io/geo').then(function (response) {
+                    var loc = response.loc.split(',');
+                    axios.post('location', {
+                        latitudine: loc[0],
+                        longitude: loc[1]
+                    }).then(function(response){
+                        mapResponse(results, response.data);
+                    });
+                }, function() { console.log("Ceva nu a mers cum trebuie, va rugam reincercati")})
             });
         } else {
             // Browser doesn't support Geolocation
-            load();
-            axios.get('https://ipinfo.io/geo').then(function (response) {
-                var loc = response.loc.split(',');
-                axios.post('location', {
-                    latitudine: loc[0],
-                    longitude: loc[1]
-                }).then(function(response){
-                    mapResponse(results, response.data);
-                });
-            })
-
+            alert('Browserul tau nu suporta Geolocatie');
         }
     }
 
