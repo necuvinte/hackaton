@@ -13,8 +13,11 @@ document.onload = function() {
 
     }
 
-    //should transform the data received into DOM elements
+    //should map the data received to DOM elements
     function mapResponse(parent, array){
+        if(results.hasChildNodes()){
+            results.removeChild(results.childNodes[0]);
+        }
         array.map( function(contact){
             var div = document.createElement('div');
             div.classList.add('content');
@@ -73,7 +76,6 @@ document.onload = function() {
     }
 
 
-
     //functie pentru detectarea pozitiei prin gps
     function getGeolocation() {
         if (navigator.geolocation) {
@@ -81,14 +83,6 @@ document.onload = function() {
             navigator.geolocation.getCurrentPosition(function (position) {
 
 
-                //dupa ce coordonatele sunt gasite, se trimit la server
-                // var form = document.createElement('form');
-                // form.setAttribute('method', 'post');
-                // var url = 'http://localhost:5000/location?latitudine=' + position.coords.latitude + '&longitudine=' + position.coords.longitude;
-                // form.setAttribute('action', url);
-                // form.style.display = 'hidden';
-                // document.body.appendChild(form);
-                // form.submit();
                 axios.post('/location', {
                     latitudine: position.coords.latitude,
                     longitudine:position.coords.longitude
@@ -96,17 +90,11 @@ document.onload = function() {
 
                     console.log(response);
                     mapResponse(results, response.data);
-                    // response.data.map(contact => {
-                    //     var paragraph = document.createElement('p');
-                    //
-                    //     results.appendChild(paragraph);
-                    // })
+
                 });
                 load();
 
-
             }, function () {
-
                   alert("Ceva nu a mers cum trebuie, va rugam reincercati")
             });
         } else {
@@ -119,42 +107,22 @@ document.onload = function() {
     function findAddress() {
         var address = document.getElementById("address").value.split(' ').join('+');
         var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyA6A3o1rZHBJU8ZcJHc-rDc2oOLb3Mu7gY";
+        load()
 
-        httpRequest = new XMLHttpRequest();
+        axios.get(url).then(function(response){
+            latitudine = response.data.results[0].geometry.location.lat;
+            longitudine = response.data.results[0].geometry.location.lng;
+            axios.post('/location', {
+                latitudine: latitudine,
+                longitudine: longitudine
+            }).then(function(response){
 
-        if (!httpRequest) {
-            alert('Giving up :( Cannot create an XMLHTTP instance');
-            return false;
-        }
-
-        if (address) {
-            httpRequest.onreadystatechange = alertContents;
-            httpRequest.open('GET', url);
-            httpRequest.send();
-        }
-    }
-
-    function alertContents() {
-        if (httpRequest.readyState === XMLHttpRequest.DONE) {
-            if (httpRequest.status === 200) {
-
-                //aduna informatia
-                var latitude = JSON.parse(httpRequest.responseText).results[0].geometry.location.lat;
-                var longitude = JSON.parse(httpRequest.responseText).results[0].geometry.location.lng;
-
-                //trimite informatia la server prin POST
-                var form = document.createElement('form');
-                form.setAttribute('method', 'post');
-                var url = 'http://localhost:5000/location?latitudine=' + latitude + '&longitudine=' + longitude;
-                form.setAttribute('action', url);
-                form.style.display = 'hidden';
-                document.body.appendChild(form);
-                console.log(url);
-                form.submit();
-            } else {
-                alert('Va rugam sa alegeti o adresa valida');
-            }
-        }
+                mapResponse(results, response.data);
+                load()
+            });
+        })
 
     }
+
+
 }();

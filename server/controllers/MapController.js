@@ -1,6 +1,6 @@
 let Contact = require('../models/contact');
 const distance = require('google-distance');
-distance.apiKey = 'AIzaSyAfttVIWtw09qGs7Wn-dSco4RPCmsFvca4';
+distance.apiKey = 'AIzaSyAr5_xqb3-4Oyxyde0mG2Xq4cE-MciPLaM';
 
 module.exports.returnLocations = (req, res) => {
 
@@ -40,7 +40,7 @@ module.exports.returnLocations = (req, res) => {
             function(err, data) {
                 if (err) return console.log(err);
                 //console.log(data);
-                contacteValide.forEach(function(contact, index, contacts){
+                contacteValide.forEach(function(contact, index){
                     contact.distanta = data[index].distance;
                     contact.durata = data[index].durationValue;
                     contacteValide[index] = contact;
