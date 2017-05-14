@@ -7,5 +7,8 @@
     "angular": "latest",
     "angular-route": "latest",
     "angular-ui-grid": "latest"
+  },
+  "resolutions": {
+    "angular": "1.6.4"
   }
 }
