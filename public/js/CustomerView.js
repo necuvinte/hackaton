@@ -107,15 +107,17 @@ document.onload = function() {
 
             }, function () {
                 load();
-                axios.get('https://ipinfo.io/geo').then(function (response) {
-                    var loc = response.loc.split(',');
-                    axios.post('location', {
-                        latitudine: loc[0],
-                        longitude: loc[1]
-                    }).then(function(response){
-                        mapResponse(results, response.data);
-                    });
-                }, function() { console.log("Ceva nu a mers cum trebuie, va rugam reincercati")})
+                axios.get('http://www.mapquestapi.com/geocoding/v1/address').then(function (response) {
+                //     var loc = response.loc.split(',');
+                //     axios.post('location', {
+                //         latitudine: loc[0],
+                //         longitude: loc[1]
+                //     }).then(function(response){
+                //         mapResponse(results, response.data);
+                //     });
+                // }
+                    console.log(response)
+                , function() { console.log("Ceva nu a mers cum trebuie, va rugam reincercati")})
             });
         } else {
             // Browser doesn't support Geolocation
