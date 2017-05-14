@@ -115,8 +115,8 @@ document.onload = function() {
                 //     }).then(function(response){
                 //         mapResponse(results, response.data);
                 //     });
-                // }
-                    console.log(response)
+                        console.log(response);
+                 }
                 , function() { console.log("Ceva nu a mers cum trebuie, va rugam reincercati")})
             });
         } else {
