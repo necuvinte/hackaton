@@ -578,7 +578,7 @@ p {
 }
 
 @media only screen and (max-width: 480px), screen and (max-device-width: 480px){
-    .container {
+    body {
         width: 320px;
     }
     .boxleft{
