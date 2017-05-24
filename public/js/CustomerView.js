@@ -107,7 +107,7 @@ document.onload = function() {
     function findAddress() {
         var address = document.getElementById("address").value.split(' ').join('+');
         var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyA6A3o1rZHBJU8ZcJHc-rDc2oOLb3Mu7gY";
-        load()
+        load();
 
         axios.get(url).then(function(response){
             latitudine = response.data.results[0].geometry.location.lat;

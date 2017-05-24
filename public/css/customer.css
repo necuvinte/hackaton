@@ -42,7 +42,7 @@ table {
     border-spacing: 0;
 }
 .red-text {
-    color: #702F8A;
+    color: #3d1379;
     font-family: 'Cabin', serif;
     margin: 0 0 15px;
 }
@@ -53,7 +53,7 @@ hr {
 }
 
 .red-small{
-    color: #702F8A;
+    color: #3d1379;
     font-family: 'Cabin', serif ;
     margin 0 0 15px;
     font-size: 15px;
@@ -70,7 +70,7 @@ hr {
 }
 
 .submit {
-    background-color: #702F8A;
+    background-color: #3d1379;
     -moz-border-radius: 50px;
     -webkit-border-radius: 50px;
     border-radius: 50px;
@@ -88,7 +88,7 @@ hr {
     text-align: center;
     line-height: 30px;
     color: white;
-    background-color: #702F8A;
+    background-color: #3d1379;
     float: left;
     border-radius: 100%;
     width: 30px;
@@ -109,10 +109,11 @@ hr {
 }
 
 body{
-    background-image: url("../images/background.jpg");
-    background-repeat: repeat;
-    background-size: 100px 100px;
-    background-position: center;
+    /*background-image: url("../images/background.jpg");*/
+    /*background-repeat: repeat;*/
+    /*background-size: 100px 100px;*/
+    /*background-position: center;*/
+    background-color: #3d1379;
 }
 
 h2 {
@@ -125,7 +126,7 @@ p {
 }
 
 .container .header img {
-    width:100px;
+    width:40%;
     margin-bottom: 10px;
 }
 

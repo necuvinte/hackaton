@@ -47,11 +47,11 @@ module.exports.returnLocations = (req, res) => {
 
                 });
                 contacteValide.sort((a,b) => parseInt(a.durata) - parseInt(b.durata));
-                contacteValide.forEach(contact => console.log(contact.durata));
+                contacteValide.map(contact => console.log(contact.durata));
                 //console.log(contacteValide);
-                if(contacteValide.length > 9){
-                    contacteValide = contacteValide.slice(0,10);
-                }
+                // if(contacteValide.length > 9){
+                //     contacteValide = contacteValide.slice(0,10);
+                // }
                 res.send(contacteValide);
             });
     });
